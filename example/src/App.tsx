@@ -67,7 +67,7 @@ const App = () => {
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 10),
       name: "Task 5",
       id: "Task 4",
-      progress: 70,
+      progress: 60,
       dependencies: ["Task 2"],
       section: "Program 2",
     },
