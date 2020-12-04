@@ -3,6 +3,7 @@ import "gantt-task-react/dist/index.css";
 import { Task, ViewMode, Gantt } from "gantt-task-react";
 import { ViewSwitcher } from "./components/view-switcher";
 
+
 //Init
 const App = () => {
   const currentDate = new Date();
@@ -15,18 +16,12 @@ const App = () => {
     columnWidth = 250;
   }
 
-  let sections: any[] = [
-    {
-      id: "1",
-      name: "Program 1",
-    },
-    {
-      id: "2",
-      name: "Program 2",
-    },
+  const sections: string[] = [
+    "Program 1",
+    "Program 2"
   ];
 
-  let tasks: Task[] = [
+  const tasks: Task[] = [
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
@@ -76,25 +71,26 @@ const App = () => {
   const sleep = (milliseconds: number) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   };
-  let onTaskChange = (task: Task) => {
+
+  const onTaskChange = (task: Task) => {
     console.log("On date change Id:" + task.id);
   };
 
-  let onTaskDelete = (task: Task) => {
+  const onTaskDelete = (task: Task) => {
     const conf = window.confirm("Are you sure about " + task.name + " ?");
     return conf;
   };
 
-  let onProgressChange = async (task: Task) => {
+  const onProgressChange = async (task: Task) => {
     await sleep(5000);
     console.log("On progress change Id:" + task.id);
   };
 
-  let onDblClick = (task: Task) => {
+  const onDblClick = (task: Task) => {
     alert("On Double Click event Id:" + task.id);
   };
 
-  let onSelect = (task: Task, isSelected: boolean) => {
+  const onSelect = (task: Task, isSelected: boolean) => {
     console.log(task.name + " has " + (isSelected ? "selected" : "unselected"));
   };
 

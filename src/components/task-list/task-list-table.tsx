@@ -8,7 +8,7 @@ export const TaskListTableDefault: React.FC<{
   fontFamily: string;
   fontSize: string;
   locale: string;
-  sections: any[];
+  sections: string[];
   tasks: Task[];
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
@@ -21,9 +21,9 @@ export const TaskListTableDefault: React.FC<{
         fontSize: fontSize,
       }}
     >
-      {sections.map(s => {
+      {sections.map(section => {
         return (
-          <div key={`${s.id}row`}>
+          <div key={section}>
             <div
               className={styles.taskListTableRow}
               style={{ height: rowHeight }}
@@ -34,18 +34,19 @@ export const TaskListTableDefault: React.FC<{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
                 }}
-                title={s.name}
+                title={section}
               >
-                &nbsp;{s.name}
+                &nbsp;{section}
               </div>
             </div>
-            {tasks.map((t: Task) => {
-              if (t.section === s.name) {
+            {tasks
+              .filter(task => task.section === section)
+              .map(task => {
                 return (
                   <div
                     className={styles.taskListTableRow}
                     style={{ height: rowHeight }}
-                    key={t.id}
+                    key={task.id}
                   >
                     <div
                       className={styles.taskListCell}
@@ -53,9 +54,9 @@ export const TaskListTableDefault: React.FC<{
                         minWidth: rowWidth,
                         maxWidth: rowWidth,
                       }}
-                      title={t.name}
+                      title={task.name}
                     >
-                      &nbsp;{t.name}
+                      &nbsp;{task.name}
                     </div>
                     <div
                       className={styles.taskListCell}
@@ -64,14 +65,11 @@ export const TaskListTableDefault: React.FC<{
                         maxWidth: rowWidth,
                       }}
                     >
-                      &nbsp;{t.progress}%
+                      &nbsp;{task.progress}%
                     </div>
                   </div>
                 );
-              } else {
-                return <></>;
-              }
-            })}
+              })}
           </div>
         );
       })}
