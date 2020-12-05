@@ -4,7 +4,7 @@ import { addToDate } from "../../helpers/date-helper";
 import styles from "./grid.module.css";
 
 export type GridBodyProps = {
-  sections: any[];
+  sections: string[];
   tasks: Task[];
   dates: Date[];
   gridWidth: number;
@@ -13,6 +13,7 @@ export type GridBodyProps = {
   todayColor: string;
 };
 export const GridBody: React.FC<GridBodyProps> = ({
+  sections,
   tasks,
   dates,
   rowHeight,
@@ -32,10 +33,12 @@ export const GridBody: React.FC<GridBodyProps> = ({
       className={styles.gridRowLine}
     />,
   ];
-  for (const task of tasks) {
+  const totalItems = sections.length + tasks.length;
+  console.log(totalItems);
+  for (let i = 0; i < totalItems; i++) {
     gridRows.push(
       <rect
-        key={"Row" + task.id}
+        key={"Row" + i}
         x="0"
         y={y}
         width={gridWidth}
@@ -45,7 +48,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
     );
     rowLines.push(
       <line
-        key={"RowLine" + task.id}
+        key={"RowLine" + i}
         x="0"
         y1={y + rowHeight}
         x2={gridWidth}

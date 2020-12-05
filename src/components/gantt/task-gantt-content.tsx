@@ -24,6 +24,7 @@ export type BarEvent = {
   action: GanttContentMoveAction;
 };
 export type TaskGanttContentProps = {
+  sections: string[];
   tasks: Task[];
   dates: Date[];
   selectedTask: string;
@@ -53,6 +54,7 @@ export type TaskGanttContentProps = {
 } & EventOption;
 
 export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
+  sections,
   tasks,
   dates,
   selectedTask,
