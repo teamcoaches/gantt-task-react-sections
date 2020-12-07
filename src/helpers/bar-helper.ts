@@ -133,10 +133,10 @@ export const taskYCoordinate = (
   sections.map((section, i) => {
     if (i === 0) {
       y = index * 2 * rowHeight + (rowHeight - taskHeight) / 2;
-      console.log(section, i);
+      console.log(section, index, i, y);
     } else {
       y = index * rowHeight + (rowHeight - taskHeight) / 2;
-      console.log(section, i);
+      console.log(section, index, i, y);
     }
   });
   return y;

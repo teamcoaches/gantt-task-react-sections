@@ -34,7 +34,6 @@ export const GridBody: React.FC<GridBodyProps> = ({
     />,
   ];
   const totalItems = sections.length + tasks.length;
-  console.log(totalItems);
   for (let i = 0; i < totalItems; i++) {
     gridRows.push(
       <rect
