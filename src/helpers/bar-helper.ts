@@ -2,6 +2,7 @@ import { Task } from "../types/public-types";
 import { BarTask } from "../types/bar-task";
 
 export const convertToBarTasks = (
+  sections: string[],
   tasks: Task[],
   dates: Date[],
   columnWidth: number,
@@ -23,6 +24,7 @@ export const convertToBarTasks = (
 
   let barTasks = tasks.map((t, i) => {
     return convertToBarTask(
+      sections,
       t,
       i,
       dates,
@@ -55,6 +57,7 @@ export const convertToBarTasks = (
 };
 
 export const convertToBarTask = (
+  sections: string[],
   task: Task,
   index: number,
   dates: Date[],

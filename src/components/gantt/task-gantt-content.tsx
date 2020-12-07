@@ -107,6 +107,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   useEffect(() => {
     setBarTasks(
       convertToBarTasks(
+        sections,
         tasks,
         dates,
         columnWidth,
