@@ -13,6 +13,12 @@ export const TaskListTableDefault: React.FC<{
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
 }> = ({ rowHeight, rowWidth, sections, tasks, fontFamily, fontSize }) => {
+  // const [show, setShow] = React.useState<boolean>(false);
+
+  // const handleOnClick () => {
+  //   setShow(!show)
+  // }
+
   return (
     <div
       className={styles.taskListWrapper}
@@ -36,7 +42,7 @@ export const TaskListTableDefault: React.FC<{
                 }}
                 title={section}
               >
-                &nbsp;{section}
+                &#43; &nbsp;{section}
               </div>
             </div>
             {tasks
