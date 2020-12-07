@@ -2,7 +2,7 @@ import { Task } from "../types/public-types";
 import { BarTask } from "../types/bar-task";
 
 export const convertToBarTasks = (
-  sections: string[],
+  sections: any,
   tasks: Task[],
   dates: Date[],
   columnWidth: number,
@@ -74,7 +74,7 @@ export const convertToBarTask = (
 ): BarTask => {
   const x1 = taskXCoordinate(task.start, dates, dateDelta, columnWidth);
   const x2 = taskXCoordinate(task.end, dates, dateDelta, columnWidth);
-  const y = taskYCoordinate(index, rowHeight, taskHeight);
+  const y = taskYCoordinate(index, sections, rowHeight, taskHeight);
 
   const styles = {
     backgroundColor: barBackgroundColor,
@@ -84,6 +84,7 @@ export const convertToBarTask = (
     ...task.styles,
   };
   return {
+    ...sections,
     ...task,
     x1,
     x2,
@@ -124,10 +125,20 @@ export const taskXCoordinate = (
 
 export const taskYCoordinate = (
   index: number,
+  sections: string[],
   rowHeight: number,
   taskHeight: number
 ) => {
-  const y = index * rowHeight + (rowHeight - taskHeight) / 2;
+  let y = 0;
+  sections.map((section, i) => {
+    if (i === 0) {
+      y = index * 2 * rowHeight + (rowHeight - taskHeight) / 2;
+      console.log(section, i);
+    } else {
+      y = index * rowHeight + (rowHeight - taskHeight) / 2;
+      console.log(section, i);
+    }
+  });
   return y;
 };
 

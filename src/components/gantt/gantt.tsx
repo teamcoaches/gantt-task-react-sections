@@ -206,6 +206,7 @@ export const Gantt: React.SFC<GanttProps> = ({
     fontSize,
   };
   const barProps: TaskGanttContentProps = {
+    sections: ganttSections,
     tasks: ganttTasks,
     selectedTask,
     setSelectedTask: handleSelectedTask,
