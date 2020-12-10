@@ -54,9 +54,12 @@ export const Gantt: React.SFC<GanttProps> = ({
   const [startDate, endDate] = ganttDateRange(ganttTasks, viewMode);
   const dates = seedDates(startDate, endDate, viewMode);
 
-  const svgHeight = rowHeight * ganttTasks.length;
+  // Here the height of the SVG gantt
+  const svgHeight = rowHeight * (ganttTasks.length + ganttSections.length);
   const gridWidth = dates.length * columnWidth;
-  const ganttFullHeight = ganttTasks.length * rowHeight;
+  // Here is height of the gantt
+  const ganttFullHeight =
+    (ganttTasks.length + ganttSections.length) * rowHeight;
 
   useEffect(() => {
     setGanttTasks(tasks);

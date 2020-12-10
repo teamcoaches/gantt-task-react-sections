@@ -21,6 +21,17 @@
   text-overflow: ellipsis;
 }
 
+.button {
+  margin: 5px;
+  padding: 5px;
+  background-color: #fff;
+  border: none;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
 .visible {
   display: block;
 }

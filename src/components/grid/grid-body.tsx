@@ -33,11 +33,14 @@ export const GridBody: React.FC<GridBodyProps> = ({
       className={styles.gridRowLine}
     />,
   ];
-  const totalItems = sections.length + tasks.length;
-  for (let i = 0; i < totalItems; i++) {
+
+  // Here I map sections and task and the rows is created correctly
+  // but it´s no show it yet
+
+  for (const section of sections) {
     gridRows.push(
       <rect
-        key={"Row" + i}
+        key={"Row" + section}
         x="0"
         y={y}
         width={gridWidth}
@@ -47,7 +50,31 @@ export const GridBody: React.FC<GridBodyProps> = ({
     );
     rowLines.push(
       <line
-        key={"RowLine" + i}
+        key={"RowLine" + section}
+        x="0"
+        y1={y + rowHeight}
+        x2={gridWidth}
+        y2={y + rowHeight}
+        className={styles.gridRowLine}
+      />
+    );
+    y += rowHeight;
+  }
+
+  for (const task of tasks) {
+    gridRows.push(
+      <rect
+        key={"Row" + task.id}
+        x="0"
+        y={y}
+        width={gridWidth}
+        height={rowHeight}
+        className={styles.gridRow}
+      />
+    );
+    rowLines.push(
+      <line
+        key={"RowLine" + task.id}
         x="0"
         y1={y + rowHeight}
         x2={gridWidth}

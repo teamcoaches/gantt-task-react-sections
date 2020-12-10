@@ -2,7 +2,7 @@ import { Task } from "../types/public-types";
 import { BarTask } from "../types/bar-task";
 
 export const convertToBarTasks = (
-  sections: any,
+  sections: string[],
   tasks: Task[],
   dates: Date[],
   columnWidth: number,
@@ -22,9 +22,24 @@ export const convertToBarTasks = (
     dates[0].getTimezoneOffset() * 60 * 1000;
   const taskHeight = (rowHeight * barFill) / 100;
 
+  console.log(sections);
+
   let barTasks = tasks.map((t, i) => {
+    // Here we need to see when the t.section change to
+    // add 1 and move the ubication of the y cordinate
+
+    // if (t.section !== tasks[i + 1]?.section) {
+    //   i++;
+    // }
+
+    // for (const section of sections) {
+    //   if (t.section !== section) {
+    //     i++;
+    //   }
+    // }
+    i++;
+
     return convertToBarTask(
-      sections,
       t,
       i,
       dates,
@@ -57,7 +72,6 @@ export const convertToBarTasks = (
 };
 
 export const convertToBarTask = (
-  sections: string[],
   task: Task,
   index: number,
   dates: Date[],
@@ -74,7 +88,7 @@ export const convertToBarTask = (
 ): BarTask => {
   const x1 = taskXCoordinate(task.start, dates, dateDelta, columnWidth);
   const x2 = taskXCoordinate(task.end, dates, dateDelta, columnWidth);
-  const y = taskYCoordinate(index, sections, rowHeight, taskHeight);
+  const y = taskYCoordinate(index, rowHeight, taskHeight);
 
   const styles = {
     backgroundColor: barBackgroundColor,
@@ -84,7 +98,6 @@ export const convertToBarTask = (
     ...task.styles,
   };
   return {
-    ...sections,
     ...task,
     x1,
     x2,
@@ -125,20 +138,11 @@ export const taskXCoordinate = (
 
 export const taskYCoordinate = (
   index: number,
-  sections: string[],
   rowHeight: number,
   taskHeight: number
 ) => {
   let y = 0;
-  sections.map((section, i) => {
-    if (i === 0) {
-      y = index * 2 * rowHeight + (rowHeight - taskHeight) / 2;
-      console.log(section, index, i, y);
-    } else {
-      y = index * rowHeight + (rowHeight - taskHeight) / 2;
-      console.log(section, index, i, y);
-    }
-  });
+  y = index * rowHeight + (rowHeight - taskHeight) / 2;
   return y;
 };
 
