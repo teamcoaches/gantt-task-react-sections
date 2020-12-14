@@ -23,25 +23,26 @@ export const convertToBarTasks = (
   const taskHeight = (rowHeight * barFill) / 100;
 
   console.log(sections);
-
-  let barTasks = tasks.map((t, i) => {
+  let index = 0;
+  let barTasks = tasks.map(t => {
     // Here we need to see when the t.section change to
     // add 1 and move the ubication of the y cordinate
 
-    // if (t.section !== tasks[i + 1]?.section) {
-    //   i++;
-    // }
+    if (t.section !== tasks[index + 1]?.section) {
+      index += 2;
+    } else {
+      index++;
+    }
 
     // for (const section of sections) {
     //   if (t.section !== section) {
     //     i++;
     //   }
     // }
-    i++;
 
     return convertToBarTask(
       t,
-      i,
+      index,
       dates,
       dateDelta,
       columnWidth,

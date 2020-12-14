@@ -15,11 +15,11 @@ export const TaskListTableDefault: React.FC<{
 }> = ({ rowHeight, rowWidth, sections, tasks, fontFamily, fontSize }) => {
   // This state will be used to show and hide sections with task
   // and asign visible and novisible to the items
-  const [show, setShow] = React.useState<boolean>(false);
+  // const [show, setShow] = React.useState<boolean>(false);
 
-  const handleOnClick: any () => {
-    setShow(!show)
-  }
+  // const handleOnClick () => {
+  //   setShow(!show)
+  // }
 
   return (
     <div
@@ -44,9 +44,7 @@ export const TaskListTableDefault: React.FC<{
                 }}
                 title={section}
               >
-                <button className={styles.button} onClick={handleOnClick}>
-                  +
-                </button>
+                <button className={styles.button}>+</button>
                 &nbsp;{section}
               </div>
             </div>
