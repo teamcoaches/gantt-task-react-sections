@@ -22,24 +22,22 @@ export const convertToBarTasks = (
     dates[0].getTimezoneOffset() * 60 * 1000;
   const taskHeight = (rowHeight * barFill) / 100;
 
-  console.log(sections);
+  const order = {};
+  sections.map((section, i) => {
+    order[section] = i;
+  });
+
+  tasks.sort((a, b) => order[a.section] - order[b.section]);
+
   let index = 0;
   let barTasks = tasks.map(t => {
-    // Here we need to see when the t.section change to
-    // add 1 and move the ubication of the y cordinate
-
-    if (t.section !== tasks[index + 1]?.section) {
-      index += 2;
-    } else {
-      index++;
+    if (index !== 0) {
+      if (t.section !== tasks[index - 1]?.section) {
+        index++;
+      }
     }
 
-    // for (const section of sections) {
-    //   if (t.section !== section) {
-    //     i++;
-    //   }
-    // }
-
+    index++;
     return convertToBarTask(
       t,
       index,

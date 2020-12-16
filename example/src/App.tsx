@@ -18,7 +18,8 @@ const App = () => {
 
   const sections: string[] = [
     "Program 1",
-    "Program 2"
+    "Program 2",
+    "Program 3"
   ];
 
   const tasks: Task[] = [
@@ -26,7 +27,7 @@ const App = () => {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
       name: "Task 1",
-      id: "Task 0",
+      id: "0",
       progress: 45,
       section: "Program 1",
     },
@@ -34,37 +35,61 @@ const App = () => {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
       name: "Task 2",
-      id: "Task 1",
+      id: "1",
       progress: 25,
-      dependencies: ["Task 0"],
+      dependencies: ["0"],
       section: "Program 1",
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
       name: "Task 3",
-      id: "Task 2",
+      id: "2",
       progress: 10,
-      dependencies: ["Task 1"],
+      dependencies: ["1"],
       section: "Program 2",
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 9),
       name: "Task 4",
-      id: "Task 3",
+      id: "3",
       progress: 2,
-      dependencies: ["Task 2"],
+      dependencies: ["2"],
       section: "Program 2",
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 10),
       name: "Task 5",
-      id: "Task 4",
+      id: "4",
       progress: 60,
-      dependencies: ["Task 2"],
+      dependencies: ["2"],
       section: "Program 2",
+    },
+    {
+      start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
+      end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
+      name: "Task 6",
+      id: "5",
+      progress: 45,
+      section: "Program 1",
+    },
+    {
+      start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
+      end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
+      name: "Task 7",
+      id: "6",
+      progress: 45,
+      section: "Program 3",
+    },
+    {
+      start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
+      end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
+      name: "Task 8",
+      id: "7",
+      progress: 100,
+      section: "Program 3",
     },
   ];
 
