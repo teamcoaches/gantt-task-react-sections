@@ -22,6 +22,8 @@ export const convertToBarTasks = (
     dates[0].getTimezoneOffset() * 60 * 1000;
   const taskHeight = (rowHeight * barFill) / 100;
 
+  // Calculating index to Y coordinate
+
   const order = {};
   sections.map((section, i) => {
     order[section] = i;
