@@ -7,12 +7,13 @@ export const TaskListTableDefault: React.FC<{
   rowWidth: string;
   fontFamily: string;
   fontSize: string;
+  taskTableHeight: string;
   locale: string;
   sections: string[];
   tasks: Task[];
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
-}> = ({ rowHeight, rowWidth, sections, tasks, fontFamily, fontSize }) => {
+}> = ({ rowHeight, rowWidth, sections, tasks, fontFamily, fontSize, taskTableHeight}) => {
   // This state will be used to show and hide sections with task
   // and asign visible and novisible to the items
   const [show, setShow] = React.useState<boolean>(true);
@@ -27,6 +28,7 @@ export const TaskListTableDefault: React.FC<{
       style={{
         fontFamily: fontFamily,
         fontSize: fontSize,
+        height: taskTableHeight
       }}
     >
       {sections.map(section => {
@@ -45,42 +47,47 @@ export const TaskListTableDefault: React.FC<{
                 title={section}
               >
                 <button className={styles.button} onClick={handleClick}>
-                  {show ? "+" : "-"}
+                  {show ? "-" : "+"}
                 </button>
                 &nbsp;{section}
               </div>
             </div>
-            {tasks
-              .filter(task => task.section === section)
-              .map(task => {
-                return (
-                  <div
-                    className={styles.taskListTableRow}
-                    style={{ height: rowHeight }}
-                    key={task.id}
-                  >
+            <div
+              className={
+                show ? `${styles.taskContainer}` : `${styles.taskContainer} ${styles.toggle}`}
+            >
+              {tasks
+                .filter(task => task.section === section)
+                .map(task => {
+                  return (
                     <div
-                      className={styles.taskListCell}
-                      style={{
-                        minWidth: rowWidth,
-                        maxWidth: rowWidth,
-                      }}
-                      title={task.name}
+                      className={styles.taskListTableRow}
+                      style={{ height: rowHeight }}
+                      key={task.id}
                     >
-                      &nbsp;{task.name}
+                      <div
+                        className={styles.taskListCell}
+                        style={{
+                          minWidth: rowWidth,
+                          maxWidth: rowWidth,
+                        }}
+                        title={task.name}
+                      >
+                        &nbsp;{task.name}
+                      </div>
+                      <div
+                        className={styles.taskListCell}
+                        style={{
+                          minWidth: rowWidth,
+                          maxWidth: rowWidth,
+                        }}
+                      >
+                        &nbsp;{task.progress}%
+                      </div>
                     </div>
-                    <div
-                      className={styles.taskListCell}
-                      style={{
-                        minWidth: rowWidth,
-                        maxWidth: rowWidth,
-                      }}
-                    >
-                      &nbsp;{task.progress}%
-                    </div>
-                  </div>
-                );
+                  );
               })}
+              </div>
           </div>
         );
       })}

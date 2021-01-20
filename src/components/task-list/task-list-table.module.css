@@ -19,6 +19,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  position: relative;
+  z-index: 1;
 }
 
 .button {
@@ -34,4 +36,14 @@
 
 .novisible {
   display: none;
+}
+
+.taskContainer{
+  transition: all 0.3s ease-in-out;
+  margin-top: 0;
+}
+
+.toggle{
+  margin-top: -50%;
+  opacity: 0;
 }
