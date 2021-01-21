@@ -103,7 +103,6 @@ export interface StylingOption {
     rowWidth: string;
     fontFamily: string;
     fontSize: string;
-    taskTableHeight: string;
     locale: string;
     tasks: Task[];
     selectedTaskId: string;
