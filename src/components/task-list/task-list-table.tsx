@@ -13,7 +13,7 @@ export const TaskListTableDefault: React.FC<{
   tasks: Task[];
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
-}> = ({ fontFamily, fontSize, sections, rowHeight, rowWidth, tasks}) => {
+}> = ({ fontFamily, fontSize, sections, rowHeight, rowWidth, tasks }) => {
 
 
   return (
@@ -25,9 +25,12 @@ export const TaskListTableDefault: React.FC<{
       }}
     >
       {sections.map((section) =>
-
-          <TaskListItem section={ section } rowHeight={rowHeight} rowWidth={rowWidth} tasks={tasks}/>
-
+          <TaskListItem
+            section={ section }
+            rowHeight={ rowHeight }
+            rowWidth={ rowWidth }
+            tasks={tasks}
+          />
       )}
     </div>
   );
