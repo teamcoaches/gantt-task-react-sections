@@ -38,6 +38,7 @@ export const Gantt: React.SFC<GanttProps> = ({
   TooltipContent = StandardTooltipContent,
   TaskListHeader = TaskListHeaderDefault,
   TaskListTable = TaskListTableDefault,
+  showTaskList = true,
   onDateChange,
   onProgressChange,
   onDoubleClick,
@@ -57,6 +58,8 @@ export const Gantt: React.SFC<GanttProps> = ({
   // Here the height of the SVG gantt
   const svgHeight = rowHeight * (ganttTasks.length + ganttSections.length);
   const gridWidth = dates.length * columnWidth;
+  const gridHeight = "100%";
+
   // Here is height of the gantt
   const ganttFullHeight =
     (ganttTasks.length + ganttSections.length) * rowHeight;
@@ -193,6 +196,7 @@ export const Gantt: React.SFC<GanttProps> = ({
   const gridProps: GridProps = {
     columnWidth,
     gridWidth,
+    gridHeight,
     sections: ganttSections,
     tasks: ganttTasks,
     rowHeight,
@@ -253,6 +257,7 @@ export const Gantt: React.SFC<GanttProps> = ({
     setSelectedTask: handleSelectedTask,
     TaskListHeader,
     TaskListTable,
+    showTaskList: showTaskList,
   };
 
   return (
@@ -262,7 +267,9 @@ export const Gantt: React.SFC<GanttProps> = ({
       tabIndex={0}
       ref={wrapperRef}
     >
-      {listCellWidth && <TaskList {...tableProps} />}
+      <TaskList
+        {...tableProps}
+      />
       <TaskGantt
         gridProps={gridProps}
         calendarProps={calendarProps}

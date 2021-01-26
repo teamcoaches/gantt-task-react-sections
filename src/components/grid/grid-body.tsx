@@ -8,6 +8,7 @@ export type GridBodyProps = {
   tasks: Task[];
   dates: Date[];
   gridWidth: number;
+  gridHeight: string;
   rowHeight: number;
   columnWidth: number;
   todayColor: string;

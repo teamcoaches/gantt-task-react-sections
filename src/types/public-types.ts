@@ -63,6 +63,9 @@ export interface DisplayOption {
    * Specifies the month name language. Able formats: ISO 639-2, Java Locale
    */
   locale?: string;
+
+  /* show or not the task list on the left*/
+  showTaskList?: boolean
 }
 
 export interface StylingOption {

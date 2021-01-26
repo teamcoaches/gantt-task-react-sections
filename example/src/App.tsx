@@ -10,6 +10,8 @@ const App = () => {
   const [view, setView] = React.useState<ViewMode>(ViewMode.Day);
   const [isChecked, setIsChecked] = React.useState(true);
   let columnWidth = 60;
+  let listCellWidth = "155px";
+
   if (view === ViewMode.Month) {
     columnWidth = 300;
   } else if (view === ViewMode.Week) {
@@ -46,7 +48,7 @@ const App = () => {
       name: "Task 3",
       id: "2",
       progress: 10,
-      dependencies: ["1"],
+      dependencies: ["5"],
       section: "Program 2",
     },
     {
@@ -136,8 +138,9 @@ const App = () => {
         onProgressChange={onProgressChange}
         onDoubleClick={onDblClick}
         onSelect={onSelect}
-        listCellWidth={isChecked ? "155px" : ""}
+        listCellWidth={listCellWidth}
         columnWidth={columnWidth}
+        showTaskList={isChecked}
       />
     </div>
   );

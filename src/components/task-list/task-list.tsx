@@ -12,6 +12,7 @@ export type TaskListProps = {
   locale: string;
   sections: any[];
   tasks: Task[];
+  showTaskList: boolean;
   horizontalContainerClass?: string;
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
@@ -45,6 +46,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   tasks,
   selectedTaskId,
   setSelectedTask,
+  showTaskList,
   locale,
   ganttHeight,
   horizontalContainerClass,
@@ -77,7 +79,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   };
 
   return (
-    <div>
+  <div style={showTaskList ? {width:"100%"} : {width: "0%"}}>
       <TaskListHeader {...headerProps} />
       <div
         ref={horizontalContainerRef}
