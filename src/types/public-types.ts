@@ -64,8 +64,8 @@ export interface DisplayOption {
    */
   locale?: string;
 
-  /* show or not the task list on the left*/
-  showTaskList?: boolean
+  /* show or not the task list on the left */
+  showTaskList?: boolean;
 }
 
 export interface StylingOption {

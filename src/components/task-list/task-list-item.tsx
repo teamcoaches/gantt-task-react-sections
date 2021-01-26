@@ -3,42 +3,40 @@ import styles from "./task-list-table.module.css";
 import { Task } from "../../types/public-types";
 import { ShowTaskContext } from "../gantt/gantt";
 
-
 const TaskListItem: React.FC<{
   section: string;
   rowHeight: number;
   rowWidth: string;
   tasks: Task[];
 }> = ({ section, rowHeight, rowWidth, tasks }) => {
-
   // This state will be used to show and hide sections with task
   // and asign visible and novisible to the items
   const [show, setShow] = React.useState<boolean>(true);
   const [globalProgress, setGlobalProgress] = React.useState<number>(0);
-  const {showTask, setShowTask} = React.useContext(ShowTaskContext)!;
-
+  const { showTask, setShowTask } = React.useContext(ShowTaskContext)!;
 
   const handleClick = () => {
     setShow(!show);
-    setShowTask(-200)
+    // setShowTask(-200)
   };
 
-  useEffect(()=>{
-    calculateProgress()
-  })
+  useEffect(() => {
+    calculateProgress();
+  });
 
   const calculateProgress = () => {
     let progressCount = 0; // var thet will contain the sume of the sections tasks progress
     let i = 0; // Tasks' number
-    tasks.filter(task => task.section === section)
-    .map(( task ) => {
-      progressCount = progressCount + task.progress;
-      i++
-    });
-    setGlobalProgress( Math.floor(progressCount / i));
-  }
+    tasks
+      .filter(task => task.section === section)
+      .map(task => {
+        progressCount = progressCount + task.progress;
+        i++;
+      });
+    setGlobalProgress(Math.floor(progressCount / i));
+  };
 
-  return(
+  return (
     <div key={section}>
       <div
         className={styles.taskListTableRow}
@@ -66,16 +64,17 @@ const TaskListItem: React.FC<{
             maxWidth: rowWidth,
           }}
         >
-            {show ? "" : `${globalProgress}%`}
+          {show ? "" : `${globalProgress}%`}
         </div>
-
       </div>
       <div
         className={
-          show ? `${styles.taskContainer}` : `${styles.taskContainer} ${styles.toggle}`}
+          show
+            ? `${styles.taskContainer}`
+            : `${styles.taskContainer} ${styles.toggle}`
+        }
       >
-        {
-        tasks
+        {tasks
           .filter(task => task.section === section)
           .map(task => {
             return (
@@ -105,11 +104,10 @@ const TaskListItem: React.FC<{
                 </div>
               </div>
             );
-        })
-        }
-        </div>
+          })}
+      </div>
     </div>
   );
-}
+};
 
 export default TaskListItem;

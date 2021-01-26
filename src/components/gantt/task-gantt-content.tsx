@@ -92,7 +92,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   const [xStep, setXStep] = useState(0);
   const [initEventX1Delta, setInitEventX1Delta] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
-  const {showTask} = React.useContext(ShowTaskContext)!;
+  const { showTask } = React.useContext(ShowTaskContext)!;
 
   // create xStep
   useEffect(() => {
@@ -334,8 +334,9 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   };
 
   return (
-    <g className="content"
-      style={{transform:"translateY("+showTask+"px)"}}
+    <g
+      className="content"
+      style={{ transform: "translateY(" + showTask + "px)" }}
     >
       <g className="arrows" fill={arrowColor} stroke={arrowColor}>
         {barTasks.map(task => {
