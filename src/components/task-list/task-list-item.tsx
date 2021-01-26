@@ -17,7 +17,7 @@ const TaskListItem: React.FC<{
 
   const handleClick = () => {
     setShow(!show);
-    // setShowTask(-200)
+    setShowTask(-200);
   };
 
   useEffect(() => {
