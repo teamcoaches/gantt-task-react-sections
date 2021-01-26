@@ -45,6 +45,6 @@
 }
 
 .toggle{
-  margin-top: -50%;
+  height: 0px;
   opacity: 0;
 }

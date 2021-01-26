@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import styles from "./task-list-table.module.css";
 import { Task } from "../../types/public-types";
+import { ShowTaskContext } from "../gantt/gantt";
+
 
 const TaskListItem: React.FC<{
   section: string;
@@ -13,10 +15,12 @@ const TaskListItem: React.FC<{
   // and asign visible and novisible to the items
   const [show, setShow] = React.useState<boolean>(true);
   const [globalProgress, setGlobalProgress] = React.useState<number>(0);
+  const {showTask, setShowTask} = React.useContext(ShowTaskContext)!;
 
 
   const handleClick = () => {
     setShow(!show);
+    setShowTask(-200)
   };
 
   useEffect(()=>{
@@ -39,6 +43,7 @@ const TaskListItem: React.FC<{
       <div
         className={styles.taskListTableRow}
         style={{ height: rowHeight }}
+        id={showTask.toString()}
       >
         <div
           className={styles.taskListCell}

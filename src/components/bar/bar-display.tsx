@@ -37,6 +37,7 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
   const textRef = useRef<SVGTextElement>(null);
   const [isTextInside, setIsTextInside] = useState(true);
 
+
   useEffect(() => {
     if (textRef.current)
       setIsTextInside(textRef.current.getBBox().width < width);
@@ -49,6 +50,7 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
   const getBarColor = () => {
     return isSelected ? styles.backgroundSelectedColor : styles.backgroundColor;
   };
+
 
   const getX = () => {
     return isTextInside

@@ -1,4 +1,4 @@
-import React, { useState, SyntheticEvent, useRef, useEffect } from "react";
+import React, { useState, SyntheticEvent, useRef, useEffect, createContext } from "react";
 import { ViewMode, GanttProps, Task } from "../../types/public-types";
 import { GridProps } from "../grid/grid";
 import { ganttDateRange, seedDates } from "../../helpers/date-helper";
@@ -11,6 +11,32 @@ import { Scroll } from "../other/scroll";
 import { TaskListProps, TaskList } from "../task-list/task-list";
 import styles from "./gantt.module.css";
 import { TaskGantt } from "./task-gantt";
+
+
+type ShowTaskContextType = {
+  showTask: number;
+  setShowTask: (value: number) => void;
+};
+
+export const ShowTaskContext = createContext<ShowTaskContextType | undefined>(
+  undefined
+);
+
+type Props = {
+  children: React.ReactNode;
+};
+
+export const ShowTaskContextProvider = ({ children }: Props) => {
+
+  const [showTask, setShowTask] = useState(0);
+
+  return (
+    <ShowTaskContext.Provider value={{ showTask, setShowTask }}>
+      {children}
+    </ShowTaskContext.Provider>
+  );
+};
+
 
 export const Gantt: React.SFC<GanttProps> = ({
   sections,
@@ -63,6 +89,8 @@ export const Gantt: React.SFC<GanttProps> = ({
   // Here is height of the gantt
   const ganttFullHeight =
     (ganttTasks.length + ganttSections.length) * rowHeight;
+
+
 
   useEffect(() => {
     setGanttTasks(tasks);
@@ -261,31 +289,33 @@ export const Gantt: React.SFC<GanttProps> = ({
   };
 
   return (
-    <div
-      className={styles.wrapper}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      ref={wrapperRef}
-    >
-      <TaskList
-        {...tableProps}
-      />
-      <TaskGantt
-        gridProps={gridProps}
-        calendarProps={calendarProps}
-        barProps={barProps}
-        ganttHeight={ganttHeight}
-        scrollY={scrollY}
-        scrollX={scrollX}
-        onScroll={handleScrollX}
-      />
-      <Scroll
-        ganttFullHeight={ganttFullHeight}
-        ganttHeight={ganttHeight}
-        headerHeight={headerHeight}
-        scroll={scrollY}
-        onScroll={handleScrollY}
-      />
-    </div>
+    <ShowTaskContextProvider>
+      <div
+        className={styles.wrapper}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        ref={wrapperRef}
+      >
+        <TaskList
+          {...tableProps}
+        />
+        <TaskGantt
+          gridProps={gridProps}
+          calendarProps={calendarProps}
+          barProps={barProps}
+          ganttHeight={ganttHeight}
+          scrollY={scrollY}
+          scrollX={scrollX}
+          onScroll={handleScrollX}
+        />
+        <Scroll
+          ganttFullHeight={ganttFullHeight}
+          ganttHeight={ganttHeight}
+          headerHeight={headerHeight}
+          scroll={scrollY}
+          onScroll={handleScrollY}
+        />
+      </div>
+    </ShowTaskContextProvider>
   );
 };
