@@ -92,7 +92,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   const [xStep, setXStep] = useState(0);
   const [initEventX1Delta, setInitEventX1Delta] = useState(0);
   const [isMoving, setIsMoving] = useState(false);
-  const {showTask} = React.useContext(ShowTaskContext)!;
+  const { showTask, setShowTask } = React.useContext(ShowTaskContext)!;
 
   // create xStep
   useEffect(() => {
@@ -123,8 +123,10 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
         barBackgroundSelectedColor
       )
     );
+    setShowTask(sections);
   }, [
     tasks,
+    sections,
     rowHeight,
     barCornerRadius,
     columnWidth,
@@ -334,39 +336,44 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   };
 
   return (
-    <g className="content"
-      style={{transform:"translateY("+showTask+"px)"}}
+    <g
+      className="content"
+      style={{ transform: "translateY(" + showTask + "px)" }}
     >
       <g className="arrows" fill={arrowColor} stroke={arrowColor}>
-        {barTasks.map(task => {
-          return task.barChildren.map(child => {
-            return (
-              <Arrow
-                key={`Arrow from ${task.id} to ${barTasks[child].id}`}
-                taskFrom={task}
-                taskTo={barTasks[child]}
-                rowHeight={rowHeight}
-                arrowIndent={arrowIndent}
-              />
-            );
-          });
-        })}
+        {barTasks
+          .filter(barTask => showTask.indexOf(barTask.section) > -1)
+          .map(task => {
+            return task.barChildren.map(child => {
+              return (
+                <Arrow
+                  key={`Arrow from ${task.id} to ${barTasks[child].id}`}
+                  taskFrom={task}
+                  taskTo={barTasks[child]}
+                  rowHeight={rowHeight}
+                  arrowIndent={arrowIndent}
+                />
+              );
+            });
+          })}
       </g>
       <g className="bar" fontFamily={fontFamily} fontSize={fontSize}>
-        {barTasks.map(task => {
-          return (
-            <Bar
-              task={task}
-              arrowIndent={arrowIndent}
-              isProgressChangeable={!!onProgressChange && !task.isDisabled}
-              isDateChangeable={!!onDateChange && !task.isDisabled}
-              isDelete={!task.isDisabled}
-              onEventStart={handleBarEventStart}
-              key={task.id}
-              isSelected={task.id === selectedTask}
-            />
-          );
-        })}
+        {barTasks
+          .filter(barTask => showTask.indexOf(barTask.section) > -1)
+          .map(task => {
+            return (
+              <Bar
+                task={task}
+                arrowIndent={arrowIndent}
+                isProgressChangeable={!!onProgressChange && !task.isDisabled}
+                isDateChangeable={!!onDateChange && !task.isDisabled}
+                isDelete={!task.isDisabled}
+                onEventStart={handleBarEventStart}
+                key={task.id}
+                isSelected={task.id === selectedTask}
+              />
+            );
+          })}
       </g>
       <g className="toolTip">
         {barEvent.changedTask && (

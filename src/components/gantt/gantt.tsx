@@ -1,4 +1,10 @@
-import React, { useState, SyntheticEvent, useRef, useEffect, createContext } from "react";
+import React, {
+  useState,
+  SyntheticEvent,
+  useRef,
+  useEffect,
+  createContext,
+} from "react";
 import { ViewMode, GanttProps, Task } from "../../types/public-types";
 import { GridProps } from "../grid/grid";
 import { ganttDateRange, seedDates } from "../../helpers/date-helper";
@@ -12,10 +18,9 @@ import { TaskListProps, TaskList } from "../task-list/task-list";
 import styles from "./gantt.module.css";
 import { TaskGantt } from "./task-gantt";
 
-
 type ShowTaskContextType = {
-  showTask: number;
-  setShowTask: (value: number) => void;
+  showTask: Array<String>;
+  setShowTask: (value: any) => void;
 };
 
 export const ShowTaskContext = createContext<ShowTaskContextType | undefined>(
@@ -27,8 +32,7 @@ type Props = {
 };
 
 export const ShowTaskContextProvider = ({ children }: Props) => {
-
-  const [showTask, setShowTask] = useState(0);
+  const [showTask, setShowTask] = useState([]);
 
   return (
     <ShowTaskContext.Provider value={{ showTask, setShowTask }}>
@@ -36,7 +40,6 @@ export const ShowTaskContextProvider = ({ children }: Props) => {
     </ShowTaskContext.Provider>
   );
 };
-
 
 export const Gantt: React.SFC<GanttProps> = ({
   sections,
@@ -89,8 +92,6 @@ export const Gantt: React.SFC<GanttProps> = ({
   // Here is height of the gantt
   const ganttFullHeight =
     (ganttTasks.length + ganttSections.length) * rowHeight;
-
-
 
   useEffect(() => {
     setGanttTasks(tasks);
@@ -296,9 +297,7 @@ export const Gantt: React.SFC<GanttProps> = ({
         tabIndex={0}
         ref={wrapperRef}
       >
-        <TaskList
-          {...tableProps}
-        />
+        <TaskList {...tableProps} />
         <TaskGantt
           gridProps={gridProps}
           calendarProps={calendarProps}
