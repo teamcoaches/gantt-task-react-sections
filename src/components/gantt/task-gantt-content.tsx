@@ -126,7 +126,6 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
     setShowTask(sections);
   }, [
     tasks,
-    sections,
     rowHeight,
     barCornerRadius,
     columnWidth,
