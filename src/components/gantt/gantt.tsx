@@ -19,29 +19,47 @@ import styles from "./gantt.module.css";
 import { TaskGantt } from "./task-gantt";
 
 type ShowTaskContextType = {
-  showTask: Array<String>;
-  setShowTask: (value: any) => void;
+  hiddenSections: string[];
+  toggleSection: (value: string) => void;
 };
 
-export const ShowTaskContext = createContext<ShowTaskContextType | undefined>(
-  undefined
-);
+export const ShowTaskContext = createContext<ShowTaskContextType>({
+  hiddenSections: [],
+  toggleSection: () => {},
+});
 
 type Props = {
   children: React.ReactNode;
 };
 
 export const ShowTaskContextProvider = ({ children }: Props) => {
-  const [showTask, setShowTask] = useState([]);
+  const [hiddenSections, setHiddenSections] = useState<string[]>([]);
+
+  const toggleSection = (section: string) => {
+    const index = hiddenSections.indexOf(section);
+
+    if (index > -1) {
+      const newSections = [...hiddenSections];
+      newSections.splice(index, 1);
+      setHiddenSections(newSections);
+    } else {
+      setHiddenSections([...hiddenSections, section]);
+    }
+  };
 
   return (
-    <ShowTaskContext.Provider value={{ showTask, setShowTask }}>
+    <ShowTaskContext.Provider
+      value={{
+        hiddenSections,
+        toggleSection,
+      }}
+    >
       {children}
     </ShowTaskContext.Provider>
   );
 };
 
-export const Gantt: React.SFC<GanttProps> = ({
+export const Gantt: React.FC<GanttProps> = ({
   sections,
   tasks,
   headerHeight = 50,

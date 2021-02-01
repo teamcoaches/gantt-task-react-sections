@@ -13,17 +13,11 @@ const TaskListItem: React.FC<{
   // and asign visible and novisible to the items
   const [show, setShow] = React.useState<boolean>(true);
   const [globalProgress, setGlobalProgress] = React.useState<number>(0);
-  const { showTask, setShowTask } = React.useContext(ShowTaskContext)!;
+  const { hiddenSections, toggleSection } = React.useContext(ShowTaskContext);
 
   const handleClick = (section: string) => {
     setShow(!show);
-    setShowTask(handleShow(section));
-  };
-
-  const handleShow = (section: string) => {
-    const i = showTask.indexOf(section);
-    i > -1 ? showTask.splice(i, 1) : showTask.push(section);
-    return showTask;
+    toggleSection(section);
   };
 
   useEffect(() => {
@@ -47,7 +41,7 @@ const TaskListItem: React.FC<{
       <div
         className={styles.taskListTableRow}
         style={{ height: rowHeight }}
-        id={showTask.toString()}
+        id={hiddenSections.toString()}
       >
         <div
           className={styles.taskListCell}
